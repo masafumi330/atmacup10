@@ -2,6 +2,17 @@
 # atmacup10
 atmacup#10 美術作品のいいね数の予測
 
+# Table of content
+- [Basic](#Basic)
+    - [Evaluation](#Evaluation)
+    - [Datasets](#Datasets)
+- [Log](#Log)
+    - [20210705](#20210705)
+    - [20210706](#20210706)
+    - [20210707](#20210707)
+        - [[考察]特徴量重要度](#[考察]特徴量重要度 )
+
+# Basic
 
 ## Evaluation
 評価指標はRMLSE.
@@ -15,7 +26,7 @@ atmacup#10 美術作品のいいね数の予測
 
 # Log
 
-### 20210705
+## 20210705
 - join
 - data download
 
@@ -29,7 +40,7 @@ atmacup#10 美術作品のいいね数の予測
         - dating_presenting_date: 制作期間がきちんと書かれている（ex. 1990-2000）のもあるが、c. 1619 - c. 1625や、1999（代表年だけ？）のものもあり、表記が揃っていない。
         - dating_sorting_date : 並び替え用に使用される、作品の代表年
 
-### 20210706
+## 20210706
 - データ確認の続き
     - test.csv
         - train.csvと似たような感じ
@@ -89,7 +100,7 @@ atmacup#10 美術作品のいいね数の予測
     - 一般的なモデルの損失関数ではRMSEが使えるからRMSEで取り回したほうが良さそう
     
     
-### 20210707
+## 20210707
 - ProfileReportを作成
     - copyright_holderカラムは欠損率率９０％以上（train, testどちらも）　→ 意味のない特徴量のような気がする。
     - acquisition_credit_lineも欠損率７０％以上（train, testどちらも）　→ 意味のない特徴量の疑い
@@ -163,20 +174,20 @@ atmacup#10 美術作品のいいね数の予測
     - 交差検証はk=5でKFold
     - 結果、スコア　RMSLE = 1.1773
     
-#### [考察]特徴量重要度
+### [考察]特徴量重要度
 
-    - sub_titleの文字数が重要なようだ。sub_titleは作品の大きさ。文字数が多い＝作品が大きい？
-    
-    - 確認したところ、大きい作品ほどいいねが多いかもしれない
-    
-    - CE_acquision_credit_line: 欠損値も多いが、"On loan from the City of Amsterdam" など、資金提供にアムステルダム市が関わっているものはいいねを多くもらっている気がする
-    
-    - description: 作品に関する説明量がいいね数に比例する？（要確認）
-    
-    - more_title: description同様、説明量に比例していいねをもらいやすいかも（要確認）
-    
-    - CE_principal_maker: 著者の名声に比例しそうなのはイメージしやすい
-    
-    - dating_year_late, dating_sorting_date, dating_year_early: 年度の３カラムは全て重要度上位。年代別に人気度が分かれているのかも
+- sub_titleの文字数が重要なようだ。sub_titleは作品の大きさ。文字数が多い＝作品が大きい？
+
+- 確認したところ、大きい作品ほどいいねが多いかもしれない
+
+- CE_acquision_credit_line: 欠損値も多いが、"On loan from the City of Amsterdam" など、資金提供にアムステルダム市が関わっているものはいいねを多くもらっている気がする
+
+- description: 作品に関する説明量がいいね数に比例する？（要確認）
+
+- more_title: description同様、説明量に比例していいねをもらいやすいかも（要確認）
+
+- CE_principal_maker: 著者の名声に比例しそうなのはイメージしやすい
+
+- dating_year_late, dating_sorting_date, dating_year_early: 年度の３カラムは全て重要度上位。年代別に人気度が分かれているのかも
     
 ![comp](./outputs/feature_importance.png)
